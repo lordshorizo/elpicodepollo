@@ -1,0 +1,1864 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>El Pico de Pollo - Pollo Asado & Empanadas</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #C41E3A;
+            --primary-dark: #8B0000;
+            --secondary: #D4AF37;
+            --accent: #FF6B35;
+            --dark: #1A1A1A;
+            --light: #F5F5DC;
+            --cream: #FFF8DC;
+            --success: #27AE60;
+            --warning: #F39C12;
+            --info: #3498DB;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--cream);
+            color: var(--dark);
+            overflow-x: hidden;
+        }
+
+        /* Logo Animation */
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .logo-container:hover {
+            transform: scale(1.05);
+        }
+
+        .rooster-icon {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            box-shadow: 0 4px 15px rgba(196, 30, 58, 0.3);
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-5px); }
+        }
+
+        .rooster-icon::before {
+            content: "🐔";
+            font-size: 32px;
+            filter: brightness(0) invert(1);
+        }
+
+        .brand-text h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 28px;
+            font-weight: 900;
+            color: var(--primary);
+            line-height: 1;
+            text-shadow: 2px 2px 0px rgba(0,0,0,0.1);
+        }
+
+        .brand-text span {
+            font-size: 12px;
+            color: var(--secondary);
+            font-weight: 600;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+        }
+
+        /* Navigation */
+        nav {
+            background: rgba(255, 248, 220, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 15px 5%;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 20px rgba(0,0,0,0.1);
+            border-bottom: 3px solid var(--secondary);
+        }
+
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 30px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--dark);
+            font-weight: 600;
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: color 0.3s;
+            position: relative;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--primary);
+            transition: width 0.3s;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+
+        .cart-btn {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 50px;
+            font-weight: 700;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.3s;
+            box-shadow: 0 4px 15px rgba(196, 30, 58, 0.3);
+        }
+
+        .cart-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(196, 30, 58, 0.4);
+        }
+
+        /* Hero Section */
+        .hero {
+            margin-top: 90px;
+            background: linear-gradient(135deg, var(--dark) 0%, #2C1810 100%);
+            min-height: 90vh;
+            display: flex;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="50" cy="50" r="40" fill="none" stroke="%23D4AF37" stroke-width="0.5" opacity="0.1"/></svg>');
+            background-size: 100px 100px;
+            animation: rotate 60s linear infinite;
+        }
+
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .hero-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 5%;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-text h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 64px;
+            font-weight: 900;
+            color: var(--light);
+            line-height: 1.1;
+            margin-bottom: 20px;
+        }
+
+        .hero-text h2 span {
+            color: var(--secondary);
+            display: block;
+        }
+
+        .hero-text p {
+            font-size: 18px;
+            color: rgba(255,255,255,0.8);
+            margin-bottom: 30px;
+            line-height: 1.6;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 20px;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            color: white;
+            padding: 18px 40px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 16px;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            transition: all 0.3s;
+            box-shadow: 0 10px 30px rgba(196, 30, 58, 0.3);
+            border: 2px solid transparent;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(196, 30, 58, 0.4);
+            border-color: var(--secondary);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: white;
+            padding: 18px 40px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 16px;
+            border: 2px solid var(--secondary);
+            transition: all 0.3s;
+        }
+
+        .btn-secondary:hover {
+            background: var(--secondary);
+            color: var(--dark);
+        }
+
+        .hero-visual {
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .rotating-plate {
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, rgba(212,175,55,0.2) 0%, transparent 70%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            animation: pulse 3s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        .chicken-illustration {
+            font-size: 200px;
+            filter: drop-shadow(0 20px 40px rgba(0,0,0,0.3));
+            animation: float 3s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+
+        .floating-items {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+        }
+
+        .floating-item {
+            position: absolute;
+            font-size: 40px;
+            animation: orbit 10s linear infinite;
+        }
+
+        .floating-item:nth-child(1) { top: 10%; left: 10%; animation-delay: 0s; }
+        .floating-item:nth-child(2) { top: 20%; right: 10%; animation-delay: 2s; }
+        .floating-item:nth-child(3) { bottom: 20%; left: 5%; animation-delay: 4s; }
+        .floating-item:nth-child(4) { bottom: 10%; right: 15%; animation-delay: 6s; }
+
+        @keyframes orbit {
+            0% { transform: rotate(0deg) translateX(20px) rotate(0deg); }
+            100% { transform: rotate(360deg) translateX(20px) rotate(-360deg); }
+        }
+
+        /* AI Agents Dashboard */
+        .ai-dashboard {
+            background: var(--dark);
+            padding: 40px 5%;
+            border-top: 4px solid var(--secondary);
+        }
+
+        .dashboard-container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .dashboard-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+        }
+
+        .dashboard-title {
+            color: var(--secondary);
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            font-weight: 700;
+        }
+
+        .status-indicator {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: var(--success);
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        .status-dot {
+            width: 8px;
+            height: 8px;
+            background: var(--success);
+            border-radius: 50%;
+            animation: blink 2s infinite;
+        }
+
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.3; }
+        }
+
+        .agents-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+
+        .agent-card {
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(212,175,55,0.2);
+            border-radius: 16px;
+            padding: 24px;
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+
+        .agent-card:hover {
+            background: rgba(255,255,255,0.1);
+            border-color: var(--secondary);
+            transform: translateY(-5px);
+        }
+
+        .agent-card.active {
+            border-color: var(--success);
+            background: rgba(39,174,96,0.1);
+        }
+
+        .agent-icon {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            margin-bottom: 16px;
+        }
+
+        .agent-name {
+            color: white;
+            font-weight: 700;
+            font-size: 16px;
+            margin-bottom: 8px;
+        }
+
+        .agent-status {
+            color: rgba(255,255,255,0.6);
+            font-size: 13px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .agent-activity {
+            margin-top: 12px;
+            padding-top: 12px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            font-size: 12px;
+            color: var(--secondary);
+        }
+
+        /* Menu Section */
+        .menu-section {
+            padding: 100px 5%;
+            background: var(--light);
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .section-header h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 48px;
+            color: var(--dark);
+            margin-bottom: 16px;
+        }
+
+        .section-header p {
+            color: #666;
+            font-size: 18px;
+        }
+
+        .menu-tabs {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-bottom: 50px;
+            flex-wrap: wrap;
+        }
+
+        .menu-tab {
+            padding: 14px 32px;
+            background: white;
+            border: 2px solid transparent;
+            border-radius: 50px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: all 0.3s;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+        }
+
+        .menu-tab:hover, .menu-tab.active {
+            border-color: var(--primary);
+            color: var(--primary);
+            transform: translateY(-2px);
+        }
+
+        .menu-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 30px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .menu-item {
+            background: white;
+            border-radius: 24px;
+            overflow: hidden;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+            transition: all 0.3s;
+            position: relative;
+        }
+
+        .menu-item:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 60px rgba(0,0,0,0.15);
+        }
+
+        .menu-item-badge {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: var(--accent);
+            color: white;
+            padding: 6px 16px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 700;
+            text-transform: uppercase;
+            z-index: 2;
+        }
+
+        .menu-item-image {
+            height: 220px;
+            background: linear-gradient(135deg, #FFE5B4 0%, #FFDAB9 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 100px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .menu-item-image::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.3) 0%, transparent 70%);
+            animation: shimmer 3s infinite;
+        }
+
+        @keyframes shimmer {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .menu-item-content {
+            padding: 28px;
+        }
+
+        .menu-item-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: start;
+            margin-bottom: 12px;
+        }
+
+        .menu-item-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--dark);
+        }
+
+        .menu-item-price {
+            font-size: 28px;
+            font-weight: 900;
+            color: var(--primary);
+        }
+
+        .menu-item-desc {
+            color: #666;
+            font-size: 14px;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        .menu-item-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .prep-time {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            color: #999;
+            font-size: 13px;
+            font-weight: 600;
+        }
+
+        .add-btn {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            background: var(--primary);
+            color: white;
+            border: none;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            transition: all 0.3s;
+            box-shadow: 0 4px 15px rgba(196, 30, 58, 0.3);
+        }
+
+        .add-btn:hover {
+            transform: scale(1.1) rotate(90deg);
+            background: var(--primary-dark);
+        }
+
+        /* AI Features Section */
+        .ai-features {
+            background: var(--dark);
+            padding: 100px 5%;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .ai-features::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                radial-gradient(circle at 20% 50%, rgba(196,30,58,0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 50%, rgba(212,175,55,0.1) 0%, transparent 50%);
+        }
+
+        .ai-features-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        .ai-features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+            margin-top: 60px;
+        }
+
+        .ai-feature-card {
+            background: rgba(255,255,255,0.03);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 24px;
+            padding: 40px;
+            transition: all 0.3s;
+        }
+
+        .ai-feature-card:hover {
+            background: rgba(255,255,255,0.06);
+            border-color: var(--secondary);
+            transform: translateY(-5px);
+        }
+
+        .ai-feature-icon {
+            width: 70px;
+            height: 70px;
+            background: linear-gradient(135deg, rgba(196,30,58,0.2) 0%, rgba(255,107,53,0.2) 100%);
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 32px;
+            margin-bottom: 24px;
+            border: 1px solid rgba(212,175,55,0.3);
+        }
+
+        .ai-feature-title {
+            color: white;
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 16px;
+        }
+
+        .ai-feature-desc {
+            color: rgba(255,255,255,0.7);
+            line-height: 1.7;
+            font-size: 15px;
+        }
+
+        .ai-feature-list {
+            list-style: none;
+            margin-top: 20px;
+        }
+
+        .ai-feature-list li {
+            color: rgba(255,255,255,0.6);
+            font-size: 14px;
+            padding: 8px 0;
+            padding-left: 24px;
+            position: relative;
+        }
+
+        .ai-feature-list li::before {
+            content: '→';
+            position: absolute;
+            left: 0;
+            color: var(--secondary);
+        }
+
+        /* Live Activity Feed */
+        .live-feed {
+            background: rgba(0,0,0,0.3);
+            border-radius: 16px;
+            padding: 24px;
+            margin-top: 40px;
+            border: 1px solid rgba(212,175,55,0.2);
+        }
+
+        .live-feed-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 16px;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .live-feed-title {
+            color: var(--secondary);
+            font-size: 14px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .live-indicator {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--success);
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        .activity-list {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .activity-item {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            padding: 12px;
+            background: rgba(255,255,255,0.03);
+            border-radius: 12px;
+            animation: slideIn 0.5s ease;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateX(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .activity-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            flex-shrink: 0;
+        }
+
+        .activity-icon.supply { background: rgba(52,152,219,0.2); }
+        .activity-icon.orders { background: rgba(231,76,60,0.2); }
+        .activity-icon.marketing { background: rgba(155,89,182,0.2); }
+        .activity-icon.kitchen { background: rgba(241,196,15,0.2); }
+
+        .activity-content {
+            flex: 1;
+        }
+
+        .activity-text {
+            color: rgba(255,255,255,0.9);
+            font-size: 14px;
+            margin-bottom: 4px;
+        }
+
+        .activity-time {
+            color: rgba(255,255,255,0.5);
+            font-size: 12px;
+        }
+
+        /* Footer */
+        footer {
+            background: #0A0A0A;
+            color: white;
+            padding: 80px 5% 40px;
+            border-top: 4px solid var(--secondary);
+        }
+
+        .footer-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 60px;
+            margin-bottom: 60px;
+        }
+
+        .footer-section h4 {
+            color: var(--secondary);
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 24px;
+            font-weight: 700;
+        }
+
+        .footer-section p, .footer-section a {
+            color: rgba(255,255,255,0.6);
+            text-decoration: none;
+            line-height: 2;
+            font-size: 15px;
+            transition: color 0.3s;
+        }
+
+        .footer-section a:hover {
+            color: var(--secondary);
+        }
+
+        .social-links {
+            display: flex;
+            gap: 16px;
+            margin-top: 24px;
+        }
+
+        .social-links a {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            transition: all 0.3s;
+        }
+
+        .social-links a:hover {
+            background: var(--primary);
+            transform: translateY(-3px);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 40px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            color: rgba(255,255,255,0.4);
+            font-size: 14px;
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 968px) {
+            .hero-content {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+
+            .hero-text h2 {
+                font-size: 42px;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .rotating-plate {
+                width: 300px;
+                height: 300px;
+            }
+
+            .chicken-illustration {
+                font-size: 150px;
+            }
+
+            .menu-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Cart Sidebar */
+        .cart-sidebar {
+            position: fixed;
+            top: 0;
+            right: -400px;
+            width: 400px;
+            height: 100vh;
+            background: white;
+            box-shadow: -10px 0 40px rgba(0,0,0,0.2);
+            z-index: 2000;
+            transition: right 0.3s ease;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .cart-sidebar.open {
+            right: 0;
+        }
+
+        .cart-header {
+            padding: 24px;
+            background: var(--primary);
+            color: white;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .cart-close {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 24px;
+            cursor: pointer;
+        }
+
+        .cart-items {
+            flex: 1;
+            overflow-y: auto;
+            padding: 24px;
+        }
+
+        .cart-empty {
+            text-align: center;
+            color: #999;
+            padding: 40px;
+        }
+
+        .cart-item {
+            display: flex;
+            gap: 16px;
+            padding: 16px;
+            background: var(--light);
+            border-radius: 12px;
+            margin-bottom: 12px;
+        }
+
+        .cart-item-image {
+            width: 60px;
+            height: 60px;
+            background: white;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 30px;
+        }
+
+        .cart-item-details {
+            flex: 1;
+        }
+
+        .cart-item-title {
+            font-weight: 700;
+            margin-bottom: 4px;
+        }
+
+        .cart-item-price {
+            color: var(--primary);
+            font-weight: 700;
+        }
+
+        .cart-footer {
+            padding: 24px;
+            border-top: 1px solid #eee;
+            background: white;
+        }
+
+        .cart-total {
+            display: flex;
+            justify-content: space-between;
+            font-size: 20px;
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+
+        .checkout-btn {
+            width: 100%;
+            padding: 18px;
+            background: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-size: 16px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .checkout-btn:hover {
+            background: var(--primary-dark);
+        }
+
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0,0,0,0.5);
+            z-index: 1500;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s;
+        }
+
+        .overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <div class="nav-container">
+            <div class="logo-container" onclick="window.scrollTo(0,0)">
+                <div class="rooster-icon"></div>
+                <div class="brand-text">
+                    <h1>El Pico de Pollo</h1>
+                    <span>Pollo Asado & Empanadas</span>
+                </div>
+            </div>
+            
+            <ul class="nav-links">
+                <li><a href="#menu">Menú</a></li>
+                <li><a href="#nosotros">Nosotros</a></li>
+                <li><a href="#agentes">Agentes AI</a></li>
+                <li><a href="#contacto">Contacto</a></li>
+            </ul>
+            
+            <button class="cart-btn" onclick="toggleCart()">
+                <i class="fas fa-shopping-bag"></i>
+                <span>Carrito</span>
+                <span id="cart-count" style="background: white; color: var(--primary); padding: 2px 8px; border-radius: 10px; font-size: 12px;">0</span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <div class="hero-text">
+                <h2>El auténtico sabor del <span>pollo asado</span></h2>
+                <p>Preparado con recetas tradicionales y la tecnología más avanzada. Nuestros agentes AI garantizan la mejor calidad, precio y servicio 24/7.</p>
+                <div class="hero-buttons">
+                    <a href="#menu" class="btn-primary">
+                        <i class="fas fa-utensils"></i>
+                        Ver Menú
+                    </a>
+                    <a href="#agentes" class="btn-secondary">
+                        <i class="fas fa-robot"></i>
+                        Conoce a Nuestros Agentes
+                    </a>
+                </div>
+            </div>
+            <div class="hero-visual">
+                <div class="rotating-plate">
+                    <div class="chicken-illustration">🍗</div>
+                    <div class="floating-items">
+                        <div class="floating-item">🥔</div>
+                        <div class="floating-item">🥟</div>
+                        <div class="floating-item">🌽</div>
+                        <div class="floating-item">🥤</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- AI Agents Dashboard -->
+    <section class="ai-dashboard" id="agentes">
+        <div class="dashboard-container">
+            <div class="dashboard-header">
+                <div class="dashboard-title">
+                    <i class="fas fa-network-wired"></i>
+                    Sistema de Agentes Autónomos
+                </div>
+                <div class="status-indicator">
+                    <div class="status-dot"></div>
+                    Todos los sistemas operativos
+                </div>
+            </div>
+            
+            <div class="agents-grid">
+                <div class="agent-card active" onclick="showAgentDetails('supply')">
+                    <div class="agent-icon">🛒</div>
+                    <div class="agent-name">Agente de Abastecimiento</div>
+                    <div class="agent-status">
+                        <i class="fas fa-circle" style="color: var(--success); font-size: 8px;"></i>
+                        Comprando insumos
+                    </div>
+                    <div class="agent-activity">
+                        Última: Negoció -8% en papas con Proveedor A
+                    </div>
+                </div>
+
+                <div class="agent-card active" onclick="showAgentDetails('orders')">
+                    <div class="agent-icon">📦</div>
+                    <div class="agent-name">Agente de Pedidos</div>
+                    <div class="agent-status">
+                        <i class="fas fa-circle" style="color: var(--success); font-size: 8px;"></i>
+                        12 pedidos activos
+                    </div>
+                    <div class="agent-activity">
+                        Tiempo promedio entrega: 28 min
+                    </div>
+                </div>
+
+                <div class="agent-card active" onclick="showAgentDetails('marketing')">
+                    <div class="agent-icon">📱</div>
+                    <div class="agent-name">Agente de Marketing</div>
+                    <div class="agent-status">
+                        <i class="fas fa-circle" style="color: var(--success); font-size: 8px;"></i>
+                        Publicando en Instagram
+                    </div>
+                    <div class="agent-activity">
+                        Engagement hoy: +23% vs ayer
+                    </div>
+                </div>
+
+                <div class="agent-card active" onclick="showAgentDetails('kitchen')">
+                    <div class="agent-icon">👨‍🍳</div>
+                    <div class="agent-name">Agente de Cocina</div>
+                    <div class="agent-status">
+                        <i class="fas fa-circle" style="color: var(--success); font-size: 8px;"></i>
+                        Optimizando tiempos
+                    </div>
+                    <div class="agent-activity">
+                        Predicción: 15 pollos próxima hora
+                    </div>
+                </div>
+
+                <div class="agent-card" onclick="showAgentDetails('pricing')">
+                    <div class="agent-icon">💰</div>
+                    <div class="agent-name">Agente de Precios</div>
+                    <div class="agent-status">
+                        <i class="fas fa-circle" style="color: var(--warning); font-size: 8px;"></i>
+                        Analizando competencia
+                    </div>
+                    <div class="agent-activity">
+                        Sugiere promo: 2x1 empanadas 20:30
+                    </div>
+                </div>
+
+                <div class="agent-card" onclick="showAgentDetails('quality')">
+                    <div class="agent-icon">⭐</div>
+                    <div class="agent-name">Agente de Calidad</div>
+                    <div class="agent-status">
+                        <i class="fas fa-circle" style="color: var(--success); font-size: 8px;"></i>
+                        Monitoreando reviews
+                    </div>
+                    <div class="agent-activity">
+                        Alerta: 2 quejas de "salado" detectadas
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Menu Section -->
+    <section class="menu-section" id="menu">
+        <div class="section-header">
+            <h3>Nuestro Menú</h3>
+            <p>Preparado fresco cada día con ingredientes seleccionados por nuestros agentes AI</p>
+        </div>
+
+        <div class="menu-tabs">
+            <button class="menu-tab active" onclick="filterMenu('all')">Todo</button>
+            <button class="menu-tab" onclick="filterMenu('pollo')">Pollos</button>
+            <button class="menu-tab" onclick="filterMenu('papas')">Papas</button>
+            <button class="menu-tab" onclick="filterMenu('empanadas')">Empanadas</button>
+            <button class="menu-tab" onclick="filterMenu('bebidas')">Bebidas</button>
+        </div>
+
+        <div class="menu-grid" id="menu-grid">
+            <!-- Pollos -->
+            <div class="menu-item" data-category="pollo">
+                <div class="menu-item-badge">Más Vendido</div>
+                <div class="menu-item-image">🍗</div>
+                <div class="menu-item-content">
+                    <div class="menu-item-header">
+                        <h4 class="menu-item-title">Pollo Entero Asado</h4>
+                        <span class="menu-item-price">$12.990</span>
+                    </div>
+                    <p class="menu-item-desc">Pollo criollo marinado 24h en especias secretas, asado a las brasas. Incluye 2 salsas a elección.</p>
+                    <div class="menu-item-footer">
+                        <span class="prep-time">
+                            <i class="far fa-clock"></i>
+                            45 min preparación
+                        </span>
+                        <button class="add-btn" onclick="addToCart('Pollo Entero', 12990, '🍗')">
+                            <i class="fas fa-plus"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="menu-item" data-category="pollo">
+                <div class="menu-item-image">🍗</div>
+                <div class="menu-item-content">
+                    <div class="menu-item-header">
+                        <h4 class="menu-item-title">Medio Pollo</h4>
+                        <span class="menu-item-price">$7.990</span>
+                    </div>
+                    <p class="menu-item-desc">Perfecto para 1-2 personas. Jugoso por dentro, crocante por fuera. Incluye 1 salsa.</p>
+                    <div class="menu-item-footer">
+                        <span class="prep-time">
+                            <i class="far fa-clock"></i>
+                            35 min preparación
+                        </span>
+                        <button class="add-btn" onclick="addToCart('Medio Pollo', 7990, '🍗')">
+                            <i class="fas fa-plus"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="menu-item" data-category="pollo">
+                <div class="menu-item-image">🍗</div>
+                <div class="menu-item-content">
+                    <div class="menu-item-header">
+                        <h4 class="menu-item-title">Cuarto de Pollo</h4>
+                        <span class="menu-item-price">$4.990</span>
+                    </div>
+                    <p class="menu-item-desc">Dos presas a elección: pechuga, pierna, ala o muslo. Ideal para una comida rápida.</p>
+                    <div class="menu-item-footer">
+                        <span class="prep-time">
+                            <i class="far fa-clock"></i>
+                            25 min preparación
+                        </span>
+                        <button class="add-btn" onclick="addToCart('Cuarto Pollo', 4990, '🍗')">
+                            <i class="fas fa-plus"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Papas -->
+            <div class="menu-item" data-category="papas">
+                <div class="menu-item-badge">Caseras</div>
+                <div class="menu-item-image">🍟</div>
+                <div class="menu-item-content">
+                    <div class="menu-item-header">
+                        <h4 class="menu-item-title">Papas Fritas Caseras</h4>
+                        <span class="menu-item-price">$3.490</span>
+                    </div>
+                    <p class="menu-item-desc">Papas naturales cortadas a mano, doble fritura para máxima crocancia. Sal de mar.</p>
+                    <div class="menu-item-footer">
+                        <span class="prep-time">
+                            <i class="far fa-clock"></i>
+                            15 min preparación
+                        </span>
+                        <button class="add-btn" onclick="addToCart('Papas Caseras', 3490, '🍟')">
+                            <i class="fas fa-plus"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="menu-item" data-category="papas">
+                <div class="menu-item-image">🥔</div>
+                <div class="menu-item-content">
+                    <div class="menu-item-header">
+                        <h4 class="menu-item-title">Papas Naturales</h4>
+                        <span class="menu-item-price">$2.990</span>
+                    </div>
+                    <p class="menu-item-desc">Papas al horno con romero y aceite de oliva. Opción saludable y deliciosa.</p>
+                    <div class="menu-item-footer">
+                        <span class="prep-time">
+                            <i class="far fa-clock"></i>
+                            20 min preparación
+                        </span>
+                        <button class="add-btn" onclick="addToCart('Papas Naturales', 2990, '🥔')">
+                            <i class="fas fa-plus"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Empanadas -->
+            <div class="menu-item" data-category="empanadas">
+                <div class="menu-item-badge">Clásica</div>
+                <div class="menu-item-image">🥟</div>
+                <div class="menu-item-content">
+                    <div class="menu-item-header">
+                        <h4 class="menu-item-title">Empanada de Queso</h4>
+                        <span class="menu-item-price">$2.490</span>
+                    </div>
+                    <p class="menu-item-desc">Queso mozzarella derretido con orégano. Masa casera horneada.</p>
+                    <div class="menu-item-footer">
+                        <span class="prep-time">
+                            <i class="far fa-clock"></i>
+                            12 min preparación
+                        </span>
+                        <button class="add-btn" onclick="addToCart('Empanada Queso', 2490, '🥟')">
+                            <i class="fas fa-plus"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="menu-item" data-category="empanadas">
+                <div class="menu-item-badge">Favorita</div>
+                <div class="menu-item-image">🥟</div>
+                <div class="menu-item-content">
+                    <div class="menu-item-header">
+                        <h4 class="menu-item-title">Queso Pollo</h4>
+                        <span class="menu-item-price">$2.990</span>
+                    </div>
+                    <p class="menu-item-desc">Mezcla perfecta de pollo desmenuzado con queso fundido. ¡La más pedida!</p>
+                    <div class="menu-item-footer">
+                        <span class="prep-time">
+                            <i class="far fa-clock"></i>
+                            12 min preparación
+                        </span>
+                        <button class="add-btn" onclick="addToCart('Empanada Queso Pollo', 2990, '🥟')">
+                            <i class="fas fa-plus"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="menu-item" data-category="empanadas">
+                <div class="menu-item-image">🥟</div>
+                <div class="menu-item-content">
+                    <div class="menu-item-header">
+                        <h4 class="menu-item-title">Queso Champiñón</h4>
+                        <span class="menu-item-price">$2.990</span>
+                    </div>
+                    <p class="menu-item-desc">Champiñones salteados con cebolla y queso gratinado. Sabor gourmet.</p>
+                    <div class="menu-item-footer">
+                        <span class="prep-time">
+                            <i class="far fa-clock"></i>
+                            12 min preparación
+                        </span>
+                        <button class="add-btn" onclick="addToCart('Empanada Queso Champiñon', 2990, '🥟')">
+                            <i class="fas fa-plus"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="menu-item" data-category="empanadas">
+                <div class="menu-item-badge">Marina</div>
+                <div class="menu-item-image">🥟</div>
+                <div class="menu-item-content">
+                    <div class="menu-item-header">
+                        <h4 class="menu-item-title">Queso Jaiva</h4>
+                        <span class="menu-item-price">$3.490</span>
+                    </div>
+                    <p class="menu-item-desc">Jaiva fresca con queso y un toque de merkén. Especialidad de la casa.</p>
+                    <div class="menu-item-footer">
+                        <span class="prep-time">
+                            <i class="far fa-clock"></i>
+                            12 min preparación
+                        </span>
+                        <button class="add-btn" onclick="addToCart('Empanada Queso Jaiva', 3490, '🥟')">
+                            <i class="fas fa-plus"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="menu-item" data-category="empanadas">
+                <div class="menu-item-badge">Premium</div>
+                <div class="menu-item-image">🥟</div>
+                <div class="menu-item-content">
+                    <div class="menu-item-header">
+                        <h4 class="menu-item-title">Queso Loco</h4>
+                        <span class="menu-item-price">$3.990</span>
+                    </div>
+                    <p class="menu-item-desc">Locos frescos con salsa blanca y queso parmesano. Experiencia única.</p>
+                    <div class="menu-item-footer">
+                        <span class="prep-time">
+                            <i class="far fa-clock"></i>
+                            15 min preparación
+                        </span>
+                        <button class="add-btn" onclick="addToCart('Empanada Queso Loco', 3990, '🥟')">
+                            <i class="fas fa-plus"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="menu-item" data-category="empanadas">
+                <div class="menu-item-image">🥟</div>
+                <div class="menu-item-content">
+                    <div class="menu-item-header">
+                        <h4 class="menu-item-title">Queso Machas</h4>
+                        <span class="menu-item-price">$3.990</span>
+                    </div>
+                    <p class="menu-item-desc">Machas a la parmesana con queso mozzarella. Delicia del mar.</p>
+                    <div class="menu-item-footer">
+                        <span class="prep-time">
+                            <i class="far fa-clock"></i>
+                            15 min preparación
+                        </span>
+                        <button class="add-btn" onclick="addToCart('Empanada Queso Machas', 3990, '🥟')">
+                            <i class="fas fa-plus"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="menu-item" data-category="empanadas">
+                <div class="menu-item-badge">Nueva</div>
+                <div class="menu-item-image">🥟</div>
+                <div class="menu-item-content">
+                    <div class="menu-item-header">
+                        <h4 class="menu-item-title">Queso Pollo Choclo</h4>
+                        <span class="menu-item-price">$3.290</span>
+                    </div>
+                    <p class="menu-item-desc">Pollo, choclo dulce y queso. La combinación perfecta de sabores.</p>
+                    <div class="menu-item-footer">
+                        <span class="prep-time">
+                            <i class="far fa-clock"></i>
+                            12 min preparación
+                        </span>
+                        <button class="add-btn" onclick="addToCart('Empanada Queso Pollo Choclo', 3290, '🥟')">
+                            <i class="fas fa-plus"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Bebidas -->
+            <div class="menu-item" data-category="bebidas">
+                <div class="menu-item-image">🥤</div>
+                <div class="menu-item-content">
+                    <div class="menu-item-header">
+                        <h4 class="menu-item-title">Bebida 350ml</h4>
+                        <span class="menu-item-price">$1.490</span>
+                    </div>
+                    <p class="menu-item-desc">Coca-Cola, Fanta, Sprite, Pepsi. Consulta por zero/light.</p>
+                    <div class="menu-item-footer">
+                        <span class="prep-time">
+                            <i class="far fa-clock"></i>
+                            Inmediato
+                        </span>
+                        <button class="add-btn" onclick="addToCart('Bebida 350ml', 1490, '🥤')">
+                            <i class="fas fa-plus"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="menu-item" data-category="bebidas">
+                <div class="menu-item-image">🧃</div>
+                <div class="menu-item-content">
+                    <div class="menu-item-header">
+                        <h4 class="menu-item-title">Jugo Natural</h4>
+                        <span class="menu-item-price">$2.490</span>
+                    </div>
+                    <p class="menu-item-desc">Naranja, piña, frutilla o durazno. Exprimido al momento.</p>
+                    <div class="menu-item-footer">
+                        <span class="prep-time">
+                            <i class="far fa-clock"></i>
+                            5 min preparación
+                        </span>
+                        <button class="add-btn" onclick="addToCart('Jugo Natural', 2490, '🧃')">
+                            <i class="fas fa-plus"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="menu-item" data-category="bebidas">
+                <div class="menu-item-image">🍺</div>
+                <div class="menu-item-content">
+                    <div class="menu-item-header">
+                        <h4 class="menu-item-title">Cerveza Artesanal</h4>
+                        <span class="menu-item-price">$3.990</span>
+                    </div>
+                    <p class="menu-item-desc">Kross, Austral o local del día. Pregunta por nuestras variedades.</p>
+                    <div class="menu-item-footer">
+                        <span class="prep-time">
+                            <i class="far fa-clock"></i>
+                            Inmediato
+                        </span>
+                        <button class="add-btn" onclick="addToCart('Cerveza Artesanal', 3990, '🍺')">
+                            <i class="fas fa-plus"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- AI Features Section -->
+    <section class="ai-features" id="nosotros">
+        <div class="ai-features-content">
+            <div class="section-header" style="color: white;">
+                <h3 style="color: white;">Tecnología de Punta</h3>
+                <p style="color: rgba(255,255,255,0.7);">6 agentes de inteligencia artificial trabajando 24/7 para tu mejor experiencia</p>
+            </div>
+
+            <div class="ai-features-grid">
+                <div class="ai-feature-card">
+                    <div class="ai-feature-icon">🛒</div>
+                    <h4 class="ai-feature-title">Abastecimiento Inteligente</h4>
+                    <p class="ai-feature-desc">Compara precios en tiempo real entre proveedores, predice necesidades de stock y compra automáticamente cuando los precios son óptimos.</p>
+                    <ul class="ai-feature-list">
+                        <li>Reducción de 15% en costos de insumos</li>
+                        <li>Zero desabastecimiento</li>
+                        <li>Negociación automática 24/7</li>
+                    </ul>
+                </div>
+
+                <div class="ai-feature-card">
+                    <div class="ai-feature-icon">📦</div>
+                    <h4 class="ai-feature-title">Gestión de Pedidos</h4>
+                    <p class="ai-feature-desc">Centraliza UberEats, Rappi, PedidosYa y pedidos propios. Optimiza rutas de reparto y predice tiempos de entrega con precisión.</p>
+                    <ul class="ai-feature-list">
+                        <li>Sincronización multi-plataforma</li>
+                        <li>Rutas optimizadas por IA</li>
+                        <li>Predicción de demora ±3 min</li>
+                    </ul>
+                </div>
+
+                <div class="ai-feature-card">
+                    <div class="ai-feature-icon">📱</div>
+                    <h4 class="ai-feature-title">Marketing Automatizado</h4>
+                    <p class="ai-feature-desc">Crea contenido para redes, responde reviews y ajusta campañas según el clima, eventos locales y tendencias en tiempo real.</p>
+                    <ul class="ai-feature-list">
+                        <li>Respuesta automática a reviews</li>
+                        <li>Posts generados por IA</li>
+                        <li>Promociones dinámicas</li>
+                    </ul>
+                </div>
+
+                <div class="ai-feature-card">
+                    <div class="ai-feature-icon">👨‍🍳</div>
+                    <h4 class="ai-feature-title">Cocina Predictiva</h4>
+                    <p class="ai-feature-desc">Predice cuántos pollos poner al fuego cada hora. Sincroniza cocción para que todo salga caliente al mismo tiempo.</p>
+                    <ul class="ai-feature-list">
+                        <li>Zero desperdicio de comida</li>
+                        <li>Tiempos de espera mínimos</li>
+                        <li>Sincronización perfecta</li>
+                    </ul>
+                </div>
+
+                <div class="ai-feature-card">
+                    <div class="ai-feature-icon">💰</div>
+                    <h4 class="ai-feature-title">Precios Dinámicos</h4>
+                    <p class="ai-feature-desc">Ajusta precios según demanda, clima y competencia. Activa descuentos automáticos para reducir inventario sobrante.</p>
+                    <ul class="ai-feature-list">
+                        <li>Maximización de utilidades</li>
+                        <li>Descuentos inteligentes</li>
+                        <li>Competitividad garantizada</li>
+                    </ul>
+                </div>
+
+                <div class="ai-feature-card">
+                    <div class="ai-feature-icon">⭐</div>
+                    <h4 class="ai-feature-title">Control de Calidad</h4>
+                    <p class="ai-feature-desc">Analiza reviews en tiempo real, detecta problemas recurrentes y alerta al equipo antes de que afecte la reputación.</p>
+                    <ul class="ai-feature-list">
+                        <li>Análisis de sentimiento 24/7</li>
+                        <li>Alertas tempranas</li>
+                        <li>Mejora continua</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Live Activity Feed -->
+            <div class="live-feed">
+                <div class="live-feed-header">
+                    <div class="live-feed-title">
+                        <i class="fas fa-broadcast-tower"></i>
+                        Actividad en Tiempo Real
+                    </div>
+                    <div class="live-indicator">
+                        <div class="status-dot"></div>
+                        EN VIVO
+                    </div>
+                </div>
+                <div class="activity-list" id="activity-list">
+                    <div class="activity-item">
+                        <div class="activity-icon supply">🛒</div>
+                        <div class="activity-content">
+                            <div class="activity-text">Agente de Abastecimiento compró 50kg de papas a $890/kg (precio óptimo detectado)</div>
+                            <div class="activity-time">Hace 2 minutos</div>
+                        </div>
+                    </div>
+                    <div class="activity-item">
+                        <div class="activity-icon orders">📦</div>
+                        <div class="activity-content">
+                            <div class="activity-text">Pedido #1284 asignado a repartidor Juan (ETA 18 min)</div>
+                            <div class="activity-time">Hace 5 minutos</div>
+                        </div>
+                    </div>
+                    <div class="activity-item">
+                        <div class="activity-icon marketing">📱</div>
+                        <div class="activity-content">
+                            <div class="activity-text">Instagram: Publicación automática generada - "Pollo dorado perfecto 🔥"</div>
+                            <div class="activity-time">Hace 12 minutos</div>
+                        </div>
+                    </div>
+                    <div class="activity-item">
+                        <div class="activity-icon kitchen">👨‍🍳</div>
+                        <div class="activity-content">
+                            <div class="activity-text">Predicción actualizada: 8 pollos necesarios 13:00-14:00 hrs</div>
+                            <div class="activity-time">Hace 15 minutos</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="contacto">
+        <div class="footer-content">
+            <div class="footer-section">
+                <div class="logo-container" style="margin-bottom: 20px;">
+                    <div class="rooster-icon" style="width: 50px; height: 50px;"></div>
+                    <div class="brand-text">
+                        <h1 style="font-size: 24px;">El Pico de Pollo</h1>
+                        <span style="font-size: 10px;">Est. 2024</span>
+                    </div>
+                </div>
+                <p>El futuro del pollo asado. Tradición y tecnología en cada bocado.</p>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-facebook"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-whatsapp"></i></a>
+                </div>
+            </div>
+            
+            <div class="footer-section">
+                <h4>Horario</h4>
+                <p>Lunes a Domingo<br>
+                11:00 - 23:00 hrs<br>
+                <span style="color: var(--secondary);">Delivery 24/7</span></p>
+            </div>
+            
+            <div class="footer-section">
+                <h4>Contacto</h4>
+                <p>📍 Av. Siempre Viva 742, Santiago<br>
+                📞 +56 9 1234 5678<br>
+                ✉️ hola@elpicodepollo.cl</p>
+            </div>
+            
+            <div class="footer-section">
+                <h4>Agentes AI</h4>
+                <p><a href="#">Panel de Control</a><br>
+                <a href="#">Estado de Sistemas</a><br>
+                <a href="#">API Documentation</a></p>
+            </div>
+        </div>
+        
+        <div class="footer-bottom">
+            <p>&copy; 2024 El Pico de Pollo. Todos los derechos reservados. | Powered by 6 Agentes AI Autónomos 🤖</p>
+        </div>
+    </footer>
+
+    <!-- Cart Sidebar -->
+    <div class="overlay" onclick="toggleCart()"></div>
+    <div class="cart-sidebar" id="cart-sidebar">
+        <div class="cart-header">
+            <h3>Tu Pedido</h3>
+            <button class="cart-close" onclick="toggleCart()">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <div class="cart-items" id="cart-items">
+            <div class="cart-empty">
+                <i class="fas fa-shopping-bag" style="font-size: 48px; margin-bottom: 16px; opacity: 0.3;"></i>
+                <p>Tu carrito está vacío</p>
+            </div>
+        </div>
+        <div class="cart-footer">
+            <div class="cart-total">
+                <span>Total:</span>
+                <span id="cart-total">$0</span>
+            </div>
+            <button class="checkout-btn" onclick="checkout()">
+                <i class="fas fa-credit-card"></i>
+                Pagar Ahora
+            </button>
+        </div>
+    </div>
+
+    <script>
+        // Cart functionality
+        let cart = [];
+        
+        function addToCart(name, price, emoji) {
+            const existingItem = cart.find(item => item.name === name);
+            
+            if (existingItem) {
+                existingItem.quantity++;
+            } else {
+                cart.push({ name, price, emoji, quantity: 1 });
+            }
+            
+            updateCart();
+            toggleCart();
+            
+            // Animation feedback
+            const btn = event.target.closest('.add-btn');
+            btn.style.transform = 'scale(1.2) rotate(180deg)';
+            setTimeout(() => {
+                btn.style.transform = '';
+            }, 300);
+        }
+        
+        function updateCart() {
+            const cartItems = document.getElementById('cart-items');
+            const cartCount = document.getElementById('cart-count');
+            const cartTotal = document.getElementById('cart-total');
+            
+            const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+            const totalPrice = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+            
+            cartCount.textContent = totalItems;
+            cartTotal.textContent = '$' + totalPrice.toLocaleString();
+            
+            if (cart.length === 0) {
+                cartItems.innerHTML = `
+                    <div class="cart-empty">
+                        <i class="fas fa-shopping-bag" style="font-size: 48px; margin-bottom: 16px; opacity: 0.3;"></i>
+                        <p>Tu carrito está vacío</p>
+                    </div>
+                `;
+            } else {
+                cartItems.innerHTML = cart.map(item => `
+                    <div class="cart-item">
+                        <div class="cart-item-image">${item.emoji}</div>
+                        <div class="cart-item-details">
+                            <div class="cart-item-title">${item.name}</div>
+                            <div class="cart-item-price">$${item.price.toLocaleString()} x ${item.quantity}</div>
+                        </div>
+                        <button onclick="removeFromCart('${item.name}')" style="background: none; border: none; color: #999; cursor: pointer;">
+                            <i class="fas fa-trash"></i>
+                        </button>
+                    </div>
+                `).join('');
+            }
+        }
+        
+        function removeFromCart(name) {
+            cart = cart.filter(item => item.name !== name);
+            updateCart();
+        }
+        
+        function toggleCart() {
+            document.getElementById('cart-sidebar').classList.toggle('open');
+            document.querySelector('.overlay').classList.toggle('active');
+        }
+        
+        function checkout() {
+            if (cart.length === 0) {
+                alert('Tu carrito está vacío');
+                return;
+            }
+            alert('¡Gracias por tu pedido! Los agentes AI están procesando tu orden. Tiempo estimado: 35 minutos.');
+            cart = [];
+            updateCart();
+            toggleCart();
+        }
+        
+        // Menu filtering
+        function filterMenu(category) {
+            const items = document.querySelectorAll('.menu-item');
+            const tabs = document.querySelectorAll('.menu-tab');
+            
+            tabs.forEach(tab => tab.classList.remove('active'));
+            event.target.classList.add('active');
+            
+            items.forEach(item => {
+                if (category === 'all' || item.dataset.category === category) {
+                    item.style.display = 'block';
+                    item.style.animation = 'slideIn 0.5s ease';
+                } else {
+                    item.style.display = 'none';
+                }
+            });
+        }
+        
+        // Agent details modal (simplified)
+        function showAgentDetails(agent) {
+            const messages = {
+                supply: 'Agente de Abastecimiento: Actualmente comparando precios de pollo entre 5 proveedores. Última compra: 100kg de papas premium a $890/kg.',
+                orders: 'Agente de Pedidos: 12 pedidos en proceso. 3 en cocina, 5 en reparto, 4 entregados últimos 30 min.',
+                marketing: 'Agente de Marketing: Publicación programada para las 13:00 hrs. Engagement rate hoy: 4.2% (meta: 3.5%).',
+                kitchen: 'Agente de Cocina: Predicción de demanda próxima hora: 15 pollos. Temperatura hornos: 180°C óptima.',
+                pricing: 'Agente de Precios: Analizando competencia... Sugerencia: Mantener precios actuales. Demanda alta esperada fin de semana.',
+                quality: 'Agente de Calidad: Sentiment analysis últimas 50 reviews: 92% positivo. Alerta: 2 menciones de "pollo seco" - ajustando tiempo horneado.'
+            };
+            
+            alert(messages[agent]);
+        }
+        
+        // Simulate live activity updates
+        const activities = [
+            { icon: '🛒', type: 'supply', text: 'Agente de Abastecimiento renovó contrato con Proveedor de Pollo Premium (-5% descuento)', time: 'Ahora' },
+            { icon: '📦', type: 'orders', text: 'Nuevo pedido #1285 recibido desde Rappi (Total: $24.970)', time: 'Ahora' },
+            { icon: '📱', type: 'marketing', text: 'Respuesta automática enviada a review 5 estrellas en Google', time: 'Ahora' },
+            { icon: '👨‍🍳', type: 'kitchen', text: 'Ajuste automático: +2 pollos al horno por pico de demanda detectado', time: 'Ahora' }
+        ];
+        
+        setInterval(() => {
+            const list = document.getElementById('activity-list');
+            const randomActivity = activities[Math.floor(Math.random() * activities.length)];
+            
+            const newItem = document.createElement('div');
+            newItem.className = 'activity-item';
+            newItem.innerHTML = `
+                <div class="activity-icon ${randomActivity.type}">${randomActivity.icon}</div>
+                <div class="activity-content">
+                    <div class="activity-text">${randomActivity.text}</div>
+                    <div class="activity-time">${randomActivity.time}</div>
+                </div>
+            `;
+            
+            list.insertBefore(newItem, list.firstChild);
+            if (list.children.length > 6) {
+                list.removeChild(list.lastChild);
+            }
+        }, 15000); // New activity every 15 seconds
+        
+        // Smooth scroll
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
