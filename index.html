@@ -135,11 +135,11 @@
             
             if (mobile && !tablet) {
                 // Móvil → App versión
-                targetUrl = 'mobile.html';
+                targetUrl = 'app.html';
                 versionName = 'Versión Móvil';
             } else if (tablet) {
                 // Tablet → App versión (mejor experiencia táctil)
-                targetUrl = 'mobile.html';
+                targetUrl = 'app.html';
                 versionName = 'Versión Tablet';
             } else {
                 // Desktop → Web versión
@@ -158,15 +158,6 @@
         
         // Ejecutar al cargar
         window.addEventListener('load', redirectToVersion);
-        
-        // También ejecutar si cambia el tamaño de pantalla (orientación)
-        window.addEventListener('resize', () => {
-            // Solo recargar si cambió significativamente (evitar loops)
-            clearTimeout(window.resizeTimer);
-            window.resizeTimer = setTimeout(() => {
-                location.reload();
-            }, 500);
-        });
     </script>
 </body>
 </html>
