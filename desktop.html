@@ -29,7 +29,7 @@
             color: var(--dark);
         }
 
-        /* Header Desktop */
+        /* Header Desktop - Mismo logo que la app */
         .desktop-header {
             background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
             color: white;
@@ -52,6 +52,7 @@
             padding: 20px 0;
         }
 
+        /* Logo igual a la app */
         .logo-section {
             display: flex;
             align-items: center;
@@ -67,12 +68,20 @@
             align-items: center;
             justify-content: center;
             font-size: 36px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-5px); }
         }
 
         .logo-text h1 {
             font-family: 'Playfair Display', serif;
             font-size: 32px;
             font-weight: 900;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.2);
         }
 
         .logo-text span {
@@ -118,20 +127,132 @@
             gap: 10px;
         }
 
+        /* Hero con íconos flotantes como la app */
+        .hero {
+            background: linear-gradient(135deg, var(--dark) 0%, #2C1810 100%);
+            padding: 60px 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="50" cy="50" r="40" fill="none" stroke="%23D4AF37" stroke-width="0.5" opacity="0.1"/></svg>');
+            background-size: 100px 100px;
+            animation: rotate 60s linear infinite;
+        }
+
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .hero-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-content h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 52px;
+            font-weight: 900;
+            color: var(--light);
+            line-height: 1.1;
+            margin-bottom: 20px;
+        }
+
+        .hero-content h2 span {
+            color: var(--secondary);
+            display: block;
+        }
+
+        .hero-content p {
+            font-size: 18px;
+            color: rgba(255,255,255,0.8);
+            margin-bottom: 30px;
+            line-height: 1.6;
+        }
+
+        .hero-visual {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+        }
+
+        /* Plato con íconos flotantes igual a la app */
+        .hero-plate {
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, rgba(212,175,55,0.3) 0%, transparent 70%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            animation: pulse 3s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        .hero-emoji {
+            font-size: 200px;
+            filter: drop-shadow(0 20px 40px rgba(0,0,0,0.3));
+            animation: float 3s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+
+        /* Íconos flotantes alrededor del plato - IGUAL A LA APP */
+        .floating-items {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+        }
+
+        .floating-item {
+            position: absolute;
+            font-size: 40px;
+            animation: orbit 10s linear infinite;
+        }
+
+        .floating-item:nth-child(1) { top: 10%; left: 10%; animation-delay: 0s; }
+        .floating-item:nth-child(2) { top: 20%; right: 10%; animation-delay: 2s; }
+        .floating-item:nth-child(3) { bottom: 20%; left: 5%; animation-delay: 4s; }
+        .floating-item:nth-child(4) { bottom: 10%; right: 15%; animation-delay: 6s; }
+
+        @keyframes orbit {
+            0% { transform: rotate(0deg) translateX(30px) rotate(0deg); }
+            100% { transform: rotate(360deg) translateX(30px) rotate(-360deg); }
+        }
+
         /* Layout 3 columnas */
         .main-layout {
             display: grid;
             grid-template-columns: 250px 1fr 350px;
             gap: 40px;
             padding: 40px 0;
-            max-width: 1400px;
-            margin: 0 auto;
         }
 
         /* Sidebar */
         .sidebar {
             position: sticky;
-            top: 120px;
+            top: 140px;
             height: fit-content;
         }
 
@@ -243,12 +364,17 @@
             border: none;
             font-size: 18px;
             cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .add-btn:hover {
+            transform: scale(1.1) rotate(90deg);
         }
 
         /* Cart Sidebar */
         .cart-sidebar {
             position: sticky;
-            top: 120px;
+            top: 140px;
             height: fit-content;
             background: white;
             border-radius: 20px;
@@ -335,12 +461,80 @@
             font-size: 16px;
             font-weight: 700;
             cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .checkout-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(196, 30, 58, 0.3);
         }
 
         .empty-cart {
             text-align: center;
             padding: 40px 20px;
             color: #999;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--dark);
+            color: white;
+            padding: 60px 0 30px;
+            margin-top: 80px;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-section h4 {
+            color: var(--secondary);
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 20px;
+        }
+
+        .footer-section p, .footer-section a {
+            color: rgba(255,255,255,0.6);
+            text-decoration: none;
+            line-height: 2;
+            font-size: 14px;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 16px;
+            margin-top: 20px;
+        }
+
+        .social-links a {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            color: white;
+            transition: all 0.3s;
+        }
+
+        .social-links a:hover {
+            background: var(--primary);
+            transform: translateY(-3px);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            color: rgba(255,255,255,0.4);
+            font-size: 14px;
         }
 
         /* Responsive */
@@ -352,20 +546,36 @@
         }
 
         @media (max-width: 968px) {
+            .hero-grid {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+
+            .hero-content h2 {
+                font-size: 40px;
+            }
+
             .main-layout {
                 grid-template-columns: 1fr;
             }
+
             .sidebar, .cart-sidebar {
                 position: relative;
                 top: 0;
+            }
+
+            .footer-grid {
+                grid-template-columns: repeat(2, 1fr);
             }
         }
     </style>
 </head>
 <body>
+    <!-- Header -->
     <header class="desktop-header">
         <div class="container">
             <div class="header-flex">
+                <!-- Logo igual a la app -->
                 <div class="logo-section">
                     <div class="logo-icon">🐔</div>
                     <div class="logo-text">
@@ -379,7 +589,7 @@
                     <input type="text" class="search-input" placeholder="Buscar pollo, empanadas, papas..." id="searchInput">
                 </div>
                 
-                <div class="cart-btn">
+                <div class="cart-btn" onclick="scrollToCart()">
                     <i class="fas fa-shopping-cart"></i>
                     Carrito
                     <span id="cartCount">0</span>
@@ -388,8 +598,36 @@
         </div>
     </header>
 
+    <!-- Hero con íconos flotantes -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-grid">
+                <div class="hero-content">
+                    <h2>El auténtico sabor del <span>pollo asado</span></h2>
+                    <p>Preparado con recetas tradicionales. Delivery rápido y productos frescos cada día.</p>
+                    <a href="#menu" class="btn-primary" style="background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%); color: white; padding: 18px 40px; border-radius: 30px; text-decoration: none; font-weight: 700; display: inline-block;">
+                        <i class="fas fa-utensils"></i> Ver Menú
+                    </a>
+                </div>
+                <div class="hero-visual">
+                    <div class="hero-plate">
+                        <div class="hero-emoji">🍗</div>
+                        <!-- Íconos flotantes igual a la app -->
+                        <div class="floating-items">
+                            <div class="floating-item">🥔</div>
+                            <div class="floating-item">🥟</div>
+                            <div class="floating-item">🌽</div>
+                            <div class="floating-item">🥤</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Layout -->
     <div class="container">
-        <div class="main-layout">
+        <div class="main-layout" id="menu">
             <!-- Sidebar -->
             <aside class="sidebar">
                 <h3 class="sidebar-title">Categorías</h3>
@@ -419,7 +657,7 @@
             </section>
 
             <!-- Cart -->
-            <aside class="cart-sidebar">
+            <aside class="cart-sidebar" id="cartSidebar">
                 <h3 class="cart-title">🛒 Tu Pedido</h3>
                 <div id="cartItems">
                     <div class="empty-cart">
@@ -437,6 +675,49 @@
             </aside>
         </div>
     </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-section">
+                    <div class="logo-section" style="margin-bottom: 20px;">
+                        <div class="logo-icon" style="width: 50px; height: 50px;"></div>
+                        <div class="logo-text">
+                            <h1 style="font-size: 24px;">El Pico de Pollo</h1>
+                        </div>
+                    </div>
+                    <p>El auténtico sabor del pollo asado. Tradición y calidad en cada bocado.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-whatsapp"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Horario</h4>
+                    <p>Lunes a Domingo<br>11:00 - 23:00 hrs<br><span style="color: var(--secondary);">Delivery 24/7</span></p>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Contacto</h4>
+                    <p>📍 Santiago, Chile<br>📞 +56 9 1234 5678<br>✉️ hola@elpicodepollo.cl</p>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Descarga la App</h4>
+                    <p>Disponible para iOS y Android</p>
+                    <a href="#" style="color: var(--secondary); text-decoration: none; font-weight: 700;">Descargar ahora →</a>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2024 El Pico de Pollo. Todos los derechos reservados.</p>
+            </div>
+        </div>
+    </footer>
 
     <script>
         const products = [
@@ -548,6 +829,10 @@
                 }
                 updateCart();
             }
+        }
+
+        function scrollToCart() {
+            document.getElementById('cartSidebar').scrollIntoView({ behavior: 'smooth' });
         }
 
         function checkout() {
